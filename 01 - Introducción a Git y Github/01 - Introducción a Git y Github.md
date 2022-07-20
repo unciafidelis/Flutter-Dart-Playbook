@@ -64,3 +64,74 @@ Al dar enter nos mostrará la siguiente pantalla, informando que debemos verific
 
 ### [Parte 2](https://www.youtube.com/watch?v=8B_qtbdlLSU)
 
+## Git en Github con VS Code
+
+Para utilizar git en Github existen 3 formas concretas:
+
+* Por terminal <- Puro comanditos como hace 30 años (ew)
+* Por aplicación de control de versiones, Github Desktop (Funciona pero esta aparte del entorno de desarrollo y esto es menos eficiente)
+* Por aplicacion de terceros (VS Code en nuestro caso)
+
+La forma más sencilla (que conozco) a la fecha para realizar las funciones más comunes de Git en Github es utilizando el control de versiones de VS code para implementarlas, pues ahí mismo tienes el código que vas a subir a github (Clonación de repositorios).
+
+Para realizar una implementación de git en Github con VS Code y utilizar un control de versiones adecuado debemos:
+
+1. Crear un repositorio nuevo en Github (Haremos el Hola Mundo que provee Github [Hello World en Github](https://docs.github.com/es/get-started/quickstart/hello-world))
+2. Abrir VS Code
+3. Dar Click en el Source control o control de versiones
+4. Dar click en Clonar repository
+5. Seleccionar Github y Autenticarse con tu usuario y contraseña
+6. Seleccionar el Repositorio creado
+7. Seleccionar donde se guardará localmente
+8. Magia
+
+Ahora ya tenemos clonado el repositorio que creamos en github en nuestro entorno local, van a notar que se creó una carpeta en su escritorio con el nombre de tu repositorio, ahi tienes la version del clonado que recien realizaste, NO TOQUES ESTA CARPETA la utilizaremos después.
+
+Ya con nuestro repositorio podemos empezar a trabajar.
+
+Para actualizar los cambios de nuestro repositorio local a nuestro repositorio en Github debemos tener en cuenta como funciona internamente en esta parte Git, para esto debemos saber que:
+
+* Todo cambio realizado en el repositorio clonado genera un estado en el archivo modificado, creado o eliminado; este estado depende del tipo de modificación realizada en el repositorio. __A__: Archivo creado y añadido __M__: Archivo modificado y añadido __M__: Archivo modificado y no añadido __D__: Archivo eliminado __UU__: Conflicto entre ramas o branches. 
+
+* El estado se puede ver al utilizar el comando ```git status -s``` o con el hermoso botón sync de Vscode que realiza exactamente la misma acción sobre el repositorio.
+
+* Con click derecho sobre el archivo modificado y selecciona ``Stage Changes`` o si son varios los archivos que quieres actualizar da click derecho en la pestaña cambios o Changes y selecciona ``Stage All Changes`` puedes colocar en escenario o stage todas las modificaciones realizadas.
+
+* Habrá cambios que no quieras actualizar así que puedes descartarlos con click derecho ``Discard Changes`` o realizar esta misma acción en terminal con el comando ``git reset`` (Pero igual insisto ya no estamos en esos años)
+
+* Ya una vez que tengas todo en stage o escenario es momento de realizar la actualización o commit con la función ```git commit -m "Aqui va un mensaje diciendo que cambios hiciste"``` o como los campeones, dar click en el boton commit y colocar el mensaje de la actualización.
+
+Tip ganador:
+
+Todo mensaje debe utilizar una convención de palabras para que sea entendible para usuarios externos que puedan darle seguimiento a cada commit realizado, como propuesta esta:
+
+## Convención de Mensajes en Commit
+
+### Create: 
+Agregar un nuevo archivo o carpeta
+
+### Update:
+Actualizar un archivo, elemento, texto o función
+
+### Fix:
+Solucionar un Issue o error lógico
+
+### Typo:
+Solucionar un error de escritura o falta de ortografía
+
+### DELETE:
+Eliminar un archivo
+
+ejemplos:
+
+* Create ArchivoNuevo.dart
+* Update ArchivoNuevo.dart list added
+* Fix ArchivoNuevo.dart naming issue solved
+* Typo ArchivoNuevo.Dart misspelled Kow to Cow solved
+* DELETE ArchivoNuevo.dart Not in use anymore
+
+Usted ha hecho su primer modificación en un repositorio remoto utilizando el control de versiones de Git con Github y Vscode!
+
+
+
+

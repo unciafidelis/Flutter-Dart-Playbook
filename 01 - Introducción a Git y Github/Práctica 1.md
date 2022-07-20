@@ -25,13 +25,15 @@ Para más información sobre markdown [da click aquí](https://www.markdownguide
 
 Yo aprendí en esta sesión a:
 
--Quita los guiones y coloca aquí un breve resumen de lo que aprendiste-
+-Quita los guiones y coloca aquí un breve resumen de lo que aprendiste y firmalo con tu nombre de Github-
 
 ```
 
 4. Coloca en escenario el nuevo archivo creado
 
 5. Dale Commit al archivo ``Hello.md`` con el mensaje ``Create Hello.md``
+
+6. Coloca el enlace de tu nuevo repositorio en el Issue: 01 - Introducción a Git y Github
 
 Felicidades! has completado el primer módulo de nuestro curso de Flutter y Dart: 01 - Introducción a Git y Github
 

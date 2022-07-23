@@ -1,14 +1,18 @@
 03 - Fundamentos de Flutter y Dart
 
+# Dart
+
+Dart es un lenguaje optimizado para el cliente para aplicaciones rápidas en cualquier plataforma. Es soportado por Google y tiene una gran comunidad en constante crecimiento.
+
 ## Hello World
-Every app has a main() function. To display text on the console, you can use the top-level print() function:
+Cada aplicación tiene una función `main()`. Para mostrar texto en la consola, puede usar la función `print()` de nivel superior:
 ```dart
 void main() {
   print('Hello, World!');
 }
 ```
 ## Variables
-Even in type-safe Dart code, most variables don’t need explicit types, thanks to type inference:
+Incluso en el código Dart con seguridad de tipos, la mayoría de las variables no necesitan tipos explícitos, gracias a la inferencia de tipos:
 ```dart
 var name = 'Voyager I';
 var year = 1977;
@@ -19,10 +23,9 @@ var image = {
   'url': '//path/to/saturn.jpg'
 };
 ```
-Read more about variables in Dart, including default values, the final and const keywords, and static types.
 
-## Control flow statements
-Dart supports the usual control flow statements:
+## Declaraciones de flujo de control
+Dart admite las declaraciones de flujo de control habituales:
 ```dart
 if (year >= 2001) {
   print('21st century');
@@ -42,10 +45,9 @@ while (year < 2016) {
   year += 1;
 }
 ```
-Read more about control flow statements in Dart, including break and continue, switch and case, and assert.
 
-## Functions
-We recommend specifying the types of each function’s arguments and return value:
+## Funciones
+Recomendamos especificar los tipos de argumentos de cada función y el valor de retorno:
 ```dart
 int fibonacci(int n) {
   if (n == 0 || n == 1) return n;
@@ -54,17 +56,14 @@ int fibonacci(int n) {
 
 var result = fibonacci(20);
 ```
-A shorthand => (arrow) syntax is handy for functions that contain a single statement. This syntax is especially useful when passing anonymous functions as arguments:
+Una sintaxis abreviada `=>` (flecha) es útil para las funciones que contienen una sola declaración. Esta sintaxis es especialmente útil cuando se pasan funciones anónimas como argumentos:
 ```dart
 flybyObjects.where((name) => name.contains('turn')).forEach(print);
 ```
-flybyObjects.where((name) => name.contains('turn')).forEach(print);
-Besides showing an anonymous function (the argument to where()), this code shows that you can use a function as an argument: the top-level print() function is an argument to forEach().
+Además de mostrar una función anónima (el argumento de `where()`), este código muestra que puede usar una función como argumento: la función `print()` de nivel superior es un argumento de `forEach()`.
 
-Read more about functions in Dart, including optional parameters, default parameter values, and lexical scope.
-
-## Comments
-Dart comments usually start with //.
+## Comentarios
+Los comentarios de Dart generalmente comienzan con `//`.
 ```dart
 // This is a normal, one-line comment.
 
@@ -74,10 +73,9 @@ Dart comments usually start with //.
 
 /* Comments like these are also supported. */
 ```
-Read more about comments in Dart, including how the documentation tooling works.
 
 ## Imports
-To access APIs defined in other libraries, use import.
+Para acceder a las API definidas en otras bibliotecas, usa `import`.
 ```dart
 // Importing core libraries
 import 'dart:math';
@@ -88,10 +86,8 @@ import 'package:test/test.dart';
 // Importing files
 import 'path/to/my_other_file.dart';
 ```
-Read more about libraries and visibility in Dart, including library prefixes, show and hide, and lazy loading through the deferred keyword.
-
 ## Classes
-Here’s an example of a class with three properties, two constructors, and a method. One of the properties can’t be set directly, so it’s defined using a getter method (instead of a variable).
+Aquí hay un ejemplo de una clase con tres propiedades, dos constructores y un método. Una de las propiedades no se puede configurar directamente, por lo que se define mediante un método getter (en lugar de una variable).
 ```dart
 class Spacecraft {
   String name;
@@ -122,7 +118,7 @@ class Spacecraft {
   }
 }
 ```
-You might use the Spacecraft class like this:
+Podrías usar la clase Spacecraft así:
 ```dart
 var voyager = Spacecraft('Voyager I', DateTime(1977, 9, 5));
 voyager.describe();
@@ -130,16 +126,15 @@ voyager.describe();
 var voyager3 = Spacecraft.unlaunched('Voyager III');
 voyager3.describe();
 ```
-Read more about classes in Dart, including initializer lists, optional new and const, redirecting constructors, factory constructors, getters, setters, and much more.
 
 ## Enums
-Enums are a way of enumerating a predefined set of values or instances in a way which ensures that there cannot be any other instances of that type.
+Las enumeraciones son una forma de enumerar un conjunto predefinido de valores o instancias de una manera que garantiza que no puede haber otras instancias de ese tipo.
 
-Here is an example of a simple enum that defines a simple list of predefined planet types:
+Aquí hay un ejemplo de una enumeración simple que define una lista simple de tipos de planetas predefinidos:
 ```dart
 enum PlanetType { terrestrial, gas, ice }
 ```
-Here is an example of an enhanced enum declaration of a class describing planets, with a defined set of constant instances, namely the planets of our own solar system.
+Aquí hay un ejemplo de una declaración `enum` mejorada de una clase que describe planetas, con un conjunto definido de instancias constantes, a saber, los planetas de nuestro propio sistema solar.
 ```dart
 /// Enum that enumerates the different planets in our solar system
 /// and some of their properties.
@@ -171,10 +166,10 @@ if (!yourPlanet.isGiant) {
   print('Your planet is not a "giant planet".');
 }
 ```
-Read more about enums in Dart, including enhanced enum requirements, automatically introduced properties, accessing enumerated value names, switch statement support, and much more.
+Obtenga más información sobre las enumeraciones en Dart, incluidos los requisitos de enumeración mejorados, las propiedades introducidas automáticamente, el acceso a nombres de valores enumerados, la compatibilidad con declaraciones de cambio y mucho más.
 
-## Inheritance
-Dart has single inheritance.
+## Herencia
+Dart tiene herencia única.
 ```dart
 class Orbiter extends Spacecraft {
   double altitude;
@@ -199,20 +194,16 @@ class PilotedCraft extends Spacecraft with Piloted {
   // ···
 }
 ```
-PilotedCraft now has the astronauts field as well as the describeCrew() method.
+PilotedCraft ahora tiene el campo de astronauts así como el método `describeCrew()`.
 
-Read more about mixins.
-
-## Interfaces and abstract classes
-Dart has no interface keyword. Instead, all classes implicitly define an interface. Therefore, you can implement any class.
+## Interfaces y clases abstractas
+Dart no tiene una palabra clave de interfaz. En cambio, todas las clases definen implícitamente una interfaz. Por lo tanto, puede implementar cualquier clase.
 ```dart
 class MockSpaceship implements Spacecraft {
   // ···
 }
 ```
-Read more about implicit interfaces.
-
-You can create an abstract class to be extended (or implemented) by a concrete class. Abstract classes can contain abstract methods (with empty bodies).
+Puede crear una clase abstracta para que una clase concreta la amplíe (o la implemente). Las clases abstractas pueden contener métodos abstractos (con cuerpos vacíos).
 ```dart
 abstract class Describable {
   void describe();
@@ -224,12 +215,12 @@ abstract class Describable {
   }
 }
 ```
-Any class extending Describable has the describeWithEmphasis() method, which calls the extender’s implementation of describe().
+Cualquier clase que extienda Describable tiene el método `describeWithEmphasis()`, que llama a la implementación del extensor de `describe()`.
 
-Read more about abstract classes and methods.
+Lea más sobre clases y métodos abstractos.
 
 ## Async
-Avoid callback hell and make your code much more readable by using async and await.
+Evite el infierno de devolución de llamada y haga que su código sea mucho más legible usando `async` y `await`.
 ```dart
 const oneSecond = Duration(seconds: 1);
 // ···
@@ -245,7 +236,7 @@ Future<void> printWithDelay(String message) {
   });
 }
 ```
-As the next example shows, async and await help make asynchronous code easy to read.
+Como muestra el siguiente ejemplo, `async` y `await` ayudan a que el código asíncrono sea fácil de leer.
 ```dart
 Future<void> createDescriptions(Iterable<String> objects) async {
   for (final object in objects) {
@@ -265,7 +256,7 @@ Future<void> createDescriptions(Iterable<String> objects) async {
   }
 }
 ```
-You can also use async*, which gives you a nice, readable way to build streams.
+También puede usar `async*`, que le brinda una forma agradable y legible de crear flujos.
 ```dart
 Stream<String> report(Spacecraft craft, Iterable<String> objects) async* {
   for (final object in objects) {
@@ -274,10 +265,10 @@ Stream<String> report(Spacecraft craft, Iterable<String> objects) async* {
   }
 }
 ```
-Read more about asynchrony support, including async functions, Future, Stream, and the asynchronous loop (await for).
+Obtenga más información sobre la compatibilidad con la asincronía, incluidas las funciones `async`, `Future`, `Stream` y el bucle asíncrono (`await for`).
 
-## Exceptions
-To raise an exception, use throw:
+## Excepciones
+Para generar una excepción, use `throw`:
 ```dart
 if (astronauts == 0) {
   throw StateError('No astronauts.');
@@ -295,4 +286,4 @@ try {
   flybyObjects.clear();
 }
 ```
-Note that the code above is asynchronous; try works for both synchronous code and code in an async function.
+Tenga en cuenta que el código anterior es asíncrono; `try` funciona tanto para el código síncrono como para el código en una función `async`.

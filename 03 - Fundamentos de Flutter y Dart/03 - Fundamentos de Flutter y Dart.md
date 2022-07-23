@@ -4,7 +4,10 @@
 
 Dart es un lenguaje optimizado para el cliente para aplicaciones rápidas en cualquier plataforma. Es soportado por Google y tiene una gran comunidad en constante crecimiento.
 
-## Hello World
+## Instalación
+https://dart.dev/get-dart
+
+## Hola Mundo
 Cada aplicación tiene una función `main()`. Para mostrar texto en la consola, puede usar la función `print()` de nivel superior:
 ```dart
 void main() {
@@ -287,3 +290,35 @@ try {
 }
 ```
 Tenga en cuenta que el código anterior es asíncrono; `try` funciona tanto para el código síncrono como para el código en una función `async`.
+
+
+# Flutter
+Flutter es un marco de trabajo de código abierto de Google para crear hermosas aplicaciones multiplataforma compiladas de forma nativa a partir de una única base de código.
+
+## Preparar el editor
+
+Puedes crear aplicaciones con Flutter usando cualquier editor de texto combinado con nuestras herramientas de línea de comandos. Sin embargo, recomendamos usar uno de nuestros complementos de editor para una experiencia aún mejor. Estos complementos le brindan finalización de código, resaltado de sintaxis, asistencia para la edición de widgets, soporte para ejecutar y depurar, y más.
+
+## Instalar VS Code
+VS Code es un editor liviano con ejecución completa de la aplicación Flutter y soporte de depuración.
+
+[VS Code](https://code.visualstudio.com/), última versión estable
+
+## Instale los complementos Flutter y Dart
+1. Inicia VS Code.
+2. Vista de invocación > Paleta de comandos….
+3. Escribe `install`, y seleccione Extensiones: Instalar extensiones.
+4. Escribe `flutter` en el campo de búsqueda de extensiones, seleccione Flutter en la lista y haga clic en Instalar. Esto también instala el complemento Dart requerido.
+
+## Valida tu configuración con Flutter Doctor
+1. Invocar Vista > Paleta de comandos….
+2. Escribe `doctor`, y selecciona Flutter: Ejecutar Flutter Doctor.
+3.  Revise la salida en el panel OUTPUT para ver si hay algún problema. Asegúrate de seleccionar Flutter en el menú desplegable en las diferentes opciones de salida.
+
+## Crear la aplicación
+1. Invoque Ver > Paleta de comandos.
+2. Escriba `flutter` y seleccione Flutter: New Project.
+3. Seleccione Aplicación.
+4. Cree o seleccione el directorio principal para la nueva carpeta del proyecto.
+5. Ingrese un nombre de proyecto, como my_app, y presione Entrar.
+6. Espere a que se complete la creación del proyecto y aparezca el archivo main.dart.

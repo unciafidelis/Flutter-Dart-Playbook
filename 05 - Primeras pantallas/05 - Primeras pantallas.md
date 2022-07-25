@@ -98,9 +98,271 @@ Puede encontrar el paquete `english_words`, así como muchos otros paquetes de c
   ```
 El archivo `pubspec.yaml` administra los activos y las dependencias de una aplicación de Flutter. En `pubspec.yaml`, verá que se ha agregado la dependencia `english_words`.
 
-2. While viewing the `pubspec.yaml` file in editor view, click `Pub get`. This pulls the package into your project. You should see the following in the console:
+2. Mientras visualiza el archivo `pubspec.yaml` en la vista de editor, haga clic en `Pub get`. Esto introduce el paquete en su proyecto. Debería ver lo siguiente en la consola:
  ```
  flutter pub get
  ```
 Ejecutar Pub get también genera automáticamente el archivo `pubspec.lock` con una lista de todos los paquetes incluidos en el proyecto y sus números de versión.
+
+3. In `lib/main.dart`, import the new package:
   
+```dart
+import 'package:english_words/english_words.dart';
+import 'package:flutter/material.dart';
+```
+  
+A medida que escribe, Android Studio le ofrece sugerencias de bibliotecas para importar. Luego, muestra la cadena de importación en gris, lo que le permite saber que la biblioteca importada no se ha utilizado (hasta ahora).
+
+4. Use el paquete de palabras en inglés para generar el texto en lugar de usar la cadena "Hello World":
+
+```dart
+@@ -2,6 +2,7 @@
+	  // Use of this source code is governed by a BSD-style license that can be
+	  // found in the LICENSE file.
++ import 'package:english_words/english_words.dart';
+	  import 'package:flutter/material.dart';
+	  void main() {
+@@ -13,14 +14,15 @@
+	    @override
+	    Widget build(BuildContext context) {
+	+     final wordPair = WordPair.random();
+	      return MaterialApp(
+	        title: 'Welcome to Flutter',
+	        home: Scaffold(
+	          appBar: AppBar(
+	            title: const Text('Welcome to Flutter'),
+	          ),
+	-         body: const Center(
+	-           child: Text('Hello World'),
+	+         body: Center(
+	+           child: Text(wordPair.asPascalCase),
+	          ),
+	        ),
+	      );
+```
+Si la aplicación se está ejecutando, use `hot reload` para actualizar la aplicación en ejecución. Cada vez que haga clic en recargar en caliente o guarde el proyecto, debería ver un par de palabras diferente, elegido al azar, en la aplicación en ejecución. Esto se debe a que el emparejamiento de palabras se genera dentro del método de compilación, que se ejecuta cada vez que `MaterialApp` requiere representación, o cuando se cambia la plataforma en Flutter Inspector.
+  
+  “Pascal case” (también conocido como “upper camel case”), significa que cada palabra de la cadena, incluida la primera, comienza con una letra mayúscula. Entonces, "uppercamelcase" se convierte en "UpperCamelCase".
+  
+## Paso 3: Agregue un widget con estado
+
+`Stateless` widgets son inmutables, lo que significa que sus propiedades no pueden cambiar; todos los valores son finales.
+
+`Stateful` los widgets mantienen un estado que puede cambiar durante la vida útil del widget. La implementación de un widget con estado requiere al menos dos clases: 1) a `StatefulWidget` clase que crea una instancia de 2) a `State` clase. los `StatefulWidget` La clase es, en sí misma, inmutable y se puede descartar y regenerar, pero la clase `State` persiste durante la vida útil del widget.
+
+En este paso, agregará un widget con estado, `RandomWords`, que crea su clase `State`, `_RandomWordsState`. Luego usarás `RandomWords` como un elemento secundario dentro del widget sin estado existente en `MyApp`.
+
+1. Cree el código repetitivo para un widget con estado.
+En `lib/main.dart`, coloque el cursor después de todo el código, ingrese Retorno un par de veces para comenzar en una línea nueva. En su IDE, comience a escribir `stful`. El editor le pregunta si desea crear un widget `Stateful`. Pulse Retorno para aceptar. Aparece el código repetitivo para dos clases y el cursor se coloca para que ingrese el nombre de su widget con estado.
+
+2. Ingrese `RandomWords` como el nombre de su widget.
+El widget `RandomWords` hace poco más que crear su clase State.
+
+Una vez que haya ingresado `RandomWords` como el nombre del widget con estado, el IDE actualiza automáticamente la clase State que lo acompaña, nombrándola `_RandomWordsState`. De forma predeterminada, el nombre de la clase `State` tiene un prefijo bajo. Prefijar un identificador con un guión bajo impone la privacidad en el lenguaje Dart y es una mejor práctica recomendada para objetos de estado.
+
+El IDE también actualiza automáticamente la clase de estado para extender `State<RandomWords>`, lo que indica que está utilizando una clase de estado genérica especializada para usar con `RandomWords`. La mayor parte de la lógica de la aplicación reside aquí: mantiene el estado del widget `RandomWords`. Esta clase guarda la lista de pares de palabras generados, que crece infinitamente a medida que el usuario se desplaza y, en la parte 2 de este laboratorio, marca los pares de palabras favoritos a medida que el usuario los agrega o elimina de la lista al alternar el ícono del corazón.
+
+Ambas clases ahora se ven de la siguiente manera:
+  
+```dart
+  class RandomWords extends StatefulWidget {
+    const RandomWords({super.key});
+
+    @override
+    State<RandomWords> createState() => _RandomWordsState();
+  }
+
+  class _RandomWordsState extends State<RandomWords> {
+    @override
+    Widget build(BuildContext context) {
+      return Container();
+    }
+  }
+```
+3. Actualiza el método `build()` en `_RandomWordsState`:
+
+```dart
+  class _RandomWordsState extends State<RandomWords> {
+    @override
+    Widget build(BuildContext context) {
+      final wordPair = WordPair.random();
+      return Text(wordPair.asPascalCase);
+    }
+  }
+```
+
+4. Elimine el código de generación de palabras de `MyApp` realizando los cambios que se muestran en la siguiente diferencia:
+
+```dart
+   @override
+	    Widget build(BuildContext context) {
+	-     final wordPair = WordPair.random();
+	      return MaterialApp(
+	        title: 'Welcome to Flutter',
+	        home: Scaffold(
+	          appBar: AppBar(
+	            title: const Text('Welcome to Flutter'),
+	          ),
+	-         body: Center(
+	-           child: Text(wordPair.asPascalCase),
+	+         body: const Center(
+	+           child: RandomWords(),
+	          ),
+	        ),
+	      );
+	    }
+```
+
+Reinicie la aplicación. La aplicación debería comportarse como antes, mostrando un emparejamiento de palabras cada vez que recarga o guarda la aplicación.
+  
+Tip: si ve una advertencia en una hot reload que podría necesitar reiniciar la aplicación, considere reiniciarla. La advertencia puede ser un falso positivo, pero reiniciar su aplicación garantiza que sus cambios se reflejen en la interfaz de usuario de la aplicación.
+  
+## Paso 4: Cree un `ListView` de desplazamiento infinito
+
+En este paso, expandirá `_RandomWordsState` para generar y mostrar una lista de parejas de palabras. A medida que el usuario se desplaza por la lista (que se muestra en un widget ListView) crece infinitamente. El constructor de fábrica de constructores de ListView le permite crear una vista de lista de forma perezosa, bajo demanda.
+
+Agrega una lista de `_sugerencias` a la clase `_RandomWordsState` para guardar las combinaciones de palabras sugeridas. Además, agregue una variable `_biggerFont` para aumentar el tamaño de la fuente.
+  
+```dart
+  class _RandomWordsState extends State<RandomWords> {
+  final _suggestions = <WordPair>[];
+  final _biggerFont = const TextStyle(fontSize: 18);
+  // ···
+}
+```
+  
+A continuación, agregará un widget ListView a la clase `_RandomWordsState` con el constructor `ListView.builder`. Este método crea el `ListView` que muestra el emparejamiento de palabras sugerido.
+
+La clase `ListView` proporciona una propiedad de constructor, `itemBuilder`, que es un generador de fábrica y una función de devolución de llamada especificada como una función anónima. Se pasan dos parámetros a la función: `BuildContext` y el iterador de fila, i. El iterador comienza en 0 y aumenta cada vez que se llama a la función. Se incrementa dos veces por cada combinación de palabras sugerida: una vez para ListTile y otra vez para Divider. Este modelo permite que la lista sugerida siga creciendo a medida que el usuario se desplaza.
+
+Retorna un widget ListView desde el método `build` de la clase `_RandomWordsState` usando el constructor `ListView.builder`:
+
+```dart
+return ListView.builder(
+  padding: const EdgeInsets.all(16.0),
+  itemBuilder: /*1*/ (context, i) {
+    if (i.isOdd) return const Divider(); /*2*/
+
+    final index = i ~/ 2; /*3*/
+    if (index >= _suggestions.length) {
+      _suggestions.addAll(generateWordPairs().take(10)); /*4*/
+    }
+    return Text(_suggestions[index].asPascalCase);
+  },
+);
+```
+
+* La devolución de llamada `itemBuilder` se llama una vez por combinación de palabras sugerida y coloca cada sugerencia en una fila `ListTile`. Para filas pares, la función agrega una fila `ListTile` para el emparejamiento de palabras. Para filas impares, la función agrega un widget de divisor para separar visualmente las entradas. Tenga en cuenta que el divisor puede ser difícil de ver en dispositivos más pequeños.
+  
+* Agregue un widget divisor de un píxel de alto antes de cada fila en `ListView`.
+  
+* La expresión `i ~/ 2` divide `i` entre `2` y devuelve un resultado entero. Por ejemplo: 1, 2, 3, 4, 5 se convierte en 0, 1, 1, 2, 2. Esto calcula el número real de emparejamientos de palabras en `ListView`, menos los widgets divisores.
+  
+* Si ha llegado al final de los pares de palabras disponibles, genere 10 más y agréguelos a la lista de sugerencias.
+  
+El constructor `ListView.builder` crea y muestra un widget de texto una vez por combinación de palabras. En el siguiente paso, devolverá cada nuevo par como un `ListTile`, lo que le permite hacer que las filas sean más atractivas en el siguiente paso.
+  
+3. Replace the returned `Text` in the `itemBuilder` body of the `ListView.builder` in `_RandomWordsState` with a `ListTile` displaying the suggestion:
+
+```dart
+  return ListTile(
+  title: Text(
+    _suggestions[index].asPascalCase,
+    style: _biggerFont,
+  ),
+);
+```
+
+Un `ListTile` es una fila de altura fija que contiene texto, así como iconos iniciales o finales u otros widgets.
+
+4. Una vez completado, el método `build()` en la clase `_RandomWordsState` debe coincidir con el siguiente código resaltado:
+  
+`lib/main.dart (build)`
+ 
+ ```dart
+  @override
+Widget build(BuildContext context) {
+  return ListView.builder(
+    padding: const EdgeInsets.all(16.0),
+    itemBuilder: /*1*/ (context, i) {
+      if (i.isOdd) return const Divider(); /*2*/
+
+      final index = i ~/ 2; /*3*/
+      if (index >= _suggestions.length) {
+        _suggestions.addAll(generateWordPairs().take(10)); /*4*/
+      }
+      return ListTile(
+        title: Text(
+          _suggestions[index].asPascalCase,
+          style: _biggerFont,
+        ),
+      );
+    },
+  );
+}
+ ```
+
+5. Para ponerlo todo junto, actualice el título mostrado de la aplicación actualizando el método `build()` en la clase `MyApp` y cambiando el título de `AppBar`:
+  
+```dart
+  @@ -14,12 +14,12 @@
+	    @override
+	    Widget build(BuildContext context) {
+	      return MaterialApp(
+	-       title: 'Welcome to Flutter',
+	+       title: 'Startup Name Generator',
+	        home: Scaffold(
+	          appBar: AppBar(
+	-           title: const Text('Welcome to Flutter'),
+	+           title: const Text('Startup Name Generator'),
+	          ),
+	          body: const Center(
+	            child: RandomWords(),
+	          ),
+@@ -27,18 +27,36 @@
+	      );
+	    }
+	  }
+	- class RandomWords extends StatefulWidget {
+	-   const RandomWords({super.key});
+	+ class _RandomWordsState extends State<RandomWords> {
+	+   final _suggestions = <WordPair>[];
+	+   final _biggerFont = const TextStyle(fontSize: 18);
+	    @override
+	-   State<RandomWords> createState() => _RandomWordsState();
+	+   Widget build(BuildContext context) {
+	+     return ListView.builder(
+	+       padding: const EdgeInsets.all(16.0),
+	+       itemBuilder: /*1*/ (context, i) {
+	+         if (i.isOdd) return const Divider(); /*2*/
+	+ 
+	+         final index = i ~/ 2; /*3*/
+	+         if (index >= _suggestions.length) {
+	+           _suggestions.addAll(generateWordPairs().take(10)); /*4*/
+	+         }
+	+         return ListTile(
+	+           title: Text(
+	+             _suggestions[index].asPascalCase,
+	+             style: _biggerFont,
+	+           ),
+	+         );
+	+       },
+	+     );
+	+   }
+	  }
+	- class _RandomWordsState extends State<RandomWords> {
+	+ class RandomWords extends StatefulWidget {
+	+   const RandomWords({super.key});
+	+ 
+	    @override
+	-   Widget build(BuildContext context) {
+	-     final wordPair = WordPair.random();
+	-     return Text(wordPair.asPascalCase);
+	-   }
+	+   State<RandomWords> createState() => _RandomWordsState();
+	  }
+```
+6. Reinicie la aplicación. Deberías ver una lista de parejas de palabras sin importar cuánto te desplaces.
+  
+  
+### Felicidades has completado tu primer aplicación con Dart y Flutter!

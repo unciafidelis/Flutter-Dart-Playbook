@@ -13,4 +13,5 @@ VS Code es un editor liviano con ejecución completa de la aplicación Flutter y
 
 Más sobre esta instalación en:
 1. [Instalar Dart](https://dart.dev/get-dart)
-2. [Instalar Flutter](https://docs.flutter.dev/get-started/install)
+2. [Instalar Flutter](https://docs.flutter.dev/get-started/install) o [Video de instalación Flutter](https://www.youtube.com/watch?v=fEfMYAAeHmY&ab_channel=LirsTechTips) 
+    

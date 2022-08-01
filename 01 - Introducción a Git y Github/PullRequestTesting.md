@@ -4,3 +4,4 @@ Unciafidelis - Alejandro Morgan
 | ----------- | ----------- |
 | Unciafidelis     | Alejandro Morgan       |
 | SalvatoreTecjerez     | Salvador Acevedo       |
+| JuanJoseEsp           | Juan Espinosa       |

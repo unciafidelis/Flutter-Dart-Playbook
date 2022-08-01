@@ -10,6 +10,8 @@ https://uizard.io/es/templates/mobile-app-templates/
 
 https://flutterui.design/
 
+https://imagecolorpicker.com/
+
 https://flutterawesome.com/tag/ui/
 
 https://www.pinterest.com.mx/klerith/flutter-designs/
